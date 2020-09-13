@@ -35,12 +35,10 @@ public class Obstacles extends JFrame {
         this.setLayout(new BorderLayout());
 
         //  Game Panel to draw
-        GameRenderPanel gameRenderPanel = new GameRenderPanel(this.gameBoard);
+        GameBoard gameBoard = new GameBoard();
 
-        this.add(gameRenderPanel, BorderLayout.CENTER);
-        this.addKeyListener(gameRenderPanel);
-
-        gameRenderPanel.repaint();
+        this.add(gameBoard, BorderLayout.CENTER);
+        this.addKeyListener(gameBoard);
 
         //  Display the frame
         this.setVisible(true);

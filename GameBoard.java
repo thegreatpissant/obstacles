@@ -5,7 +5,10 @@
  *
  * DELTA GROUP Obstacle Course
  */
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Direction the player is moving
@@ -17,7 +20,7 @@ enum Direction {
 /**
  * The Game Board that represents the maze.
  */
-public class GameBoard {
+public class GameBoard extends JPanel implements KeyListener {
 
     //  Tokens
     static final char PLAYER_TOKEN = 'x';
@@ -60,6 +63,8 @@ public class GameBoard {
             "...........",
             "..........*",
     };
+
+    //  Render Panel
 
     //  Constructor
     public GameBoard() {
@@ -202,6 +207,57 @@ public class GameBoard {
 
             //  Update the player position.
             playerPosition = tempPlayerPosition;
+
+            if (playerPosition == this.goalPosition) {
+                JOptionPane.showInputDialog(null,"You have Won!", null);
+            }
         }
+    }
+
+    //  Draw the panel
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+
+        //  default to show any misses in rendering.
+        graphics.setColor(Color.PINK);
+
+        this.draw(graphics);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        //  Handle User input
+        switch (keyEvent.getKeyCode()) {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
+                this.movePlayer(Direction.UP);
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                this.movePlayer(Direction.DOWN);
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
+                this.movePlayer(Direction.LEFT);
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                this.movePlayer(Direction.RIGHT);
+                break;
+            default:
+                System.out.println("KeyPress = " + keyEvent.getKeyChar());
+                break;
+        }
+        this.repaint();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+
     }
 }
