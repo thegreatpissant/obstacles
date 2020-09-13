@@ -16,9 +16,6 @@ public class Obstacles extends JFrame {
     public static String AppName = "Obstacles";
     public static final int APP_WIDTH = 800, APP_HEIGHT = 800;
 
-    //  Display scale.
-    public static double BOARD_SCALE = 1.;
-
     //  Game World
     public GameBoard gameBoard = new GameBoard();
 

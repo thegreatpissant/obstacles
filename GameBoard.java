@@ -27,7 +27,7 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
 
     //  Tokens
     final char PLAYER_TOKEN = 'x';
-    final char ENDGOAL_TOKEN = '*';
+    final char END_GOAL_TOKEN = '*';
     final char OPEN_TOKEN = '.';
     final char OBSTACLE_TOKEN = 'o';
     final char HAZARD_TOKEN = 'v';
@@ -37,14 +37,10 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     int cellHeight;
     int cellWidth;
 
-    //  GameBoard Pixel Dimensions
-    int cellPixelWidth;
-    int cellPixelHeight;
-
     //  Board Width in cells
-    static int boardWidth;
+    int boardWidth;
     //  Board Height in cells
-    static int boardHeight;
+    int boardHeight;
 
     //  Player position
     Point playerPosition = new Point();
@@ -64,9 +60,6 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     ArrayList<Point> obstaclePositions = new ArrayList<>();
     //  Location of reset Positions
     ArrayList<Point> resetPositions = new ArrayList<>();
-
-    //  Board
-    String[] board;
 
     String[] defaultBoardOne = {
             "*..........",
@@ -131,12 +124,12 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     //  Load Game Board
     private void loadGameBoard() {
         if (this.currentBoardIndex >= this.boards.length) {
-            System.out.println("Board #" + this.currentBoardIndex + " is invalid, maxboards is: " + this.boards.length);
+            System.out.println("Board #" + this.currentBoardIndex + " is invalid, max boards is: " + this.boards.length);
             this.currentBoardIndex = this.boards.length - 1;
         }
         String[] gameBoard = this.boards[this.currentBoardIndex];
         //  Set the board as the passed in gameBoard
-        this.board = gameBoard;
+        String[] board = gameBoard;
 
         //  Set the board Dimensions in cells
         this.boardHeight = gameBoard.length;
@@ -162,7 +155,7 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
                             scannedPlayerPosition = new Point(x, y);
                             playerPositionSet = true;
                         break;
-                    case ENDGOAL_TOKEN:
+                    case END_GOAL_TOKEN:
                             scannedGoalPosition = new Point(x, y);
                             goalPositionSet = true;
                         break;
@@ -252,8 +245,8 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     //  Update the size of a cell
     private void updateCellSize() {
         //  Scale the cell dimensions
-        cellHeight = this.getHeight() / (GameBoard.boardHeight+1);
-        cellWidth = this.getWidth() / (GameBoard.boardWidth+1);
+        cellHeight = this.getHeight() / (this.boardHeight+1);
+        cellWidth = this.getWidth() / (this.boardWidth+1);
     }
 
     //  Move player
@@ -344,13 +337,12 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
                 //  Yes, tell them they won and set the next board to 0
                 JOptionPane.showMessageDialog(this,"You beat the Game!!\n Restarting at level 1");
                 this.resetGame();
-                this.loadGameBoard();
             }
             else {
                 JOptionPane.showMessageDialog(this,"You beat the board!!");
                 //  No, load the next board.
-                this.loadGameBoard();
             }
+            this.loadGameBoard();
         }
         this.repaint();
     }
