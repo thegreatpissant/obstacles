@@ -39,29 +39,34 @@ class GameRenderPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-        //  Handle User input
-        switch (keyEvent.getKeyChar()) {
-            case 'w':
-                this.gameBoard.movePlayer(Direction.UP);
-                break;
-            case 'd':
-                this.gameBoard.movePlayer(Direction.RIGHT);
-                break;
-            case 's':
-                this.gameBoard.movePlayer(Direction.DOWN);
-                break;
-            case 'a':
-                this.gameBoard.movePlayer(Direction.LEFT);
-                break;
-            default:
-                System.out.println("Keypresse = " + keyEvent.getKeyChar());
-                break;
-        }
-        this.repaint();
+
     }
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
+        //  Handle User input
+        switch (keyEvent.getKeyCode()) {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
+                this.gameBoard.movePlayer(Direction.UP);
+                break;
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S:
+                this.gameBoard.movePlayer(Direction.DOWN);
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A:
+                this.gameBoard.movePlayer(Direction.LEFT);
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D:
+                this.gameBoard.movePlayer(Direction.RIGHT);
+                break;
+            default:
+                System.out.println("KeyPress = " + keyEvent.getKeyChar());
+                break;
+        }
+        this.repaint();
     }
 
     @Override
