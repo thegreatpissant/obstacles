@@ -249,6 +249,9 @@ public class GameBoard extends JPanel implements KeyListener {
             case KeyEvent.VK_D:
                 this.movePlayer(Direction.RIGHT);
                 break;
+            case KeyEvent.VK_ESCAPE:
+            case KeyEvent.VK_Q:
+                System.exit(0);
             default:
                 System.out.println("KeyPress = " + keyEvent.getKeyChar());
                 break;
