@@ -229,8 +229,6 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     }
     //  Draw the world
     public void draw(Graphics graphics) {
-        //  Draw the board
-        //  @@TODO Draw all the things.
 
         //  Draw the static map objects
         this.drawGoal(graphics);
