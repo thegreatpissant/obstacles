@@ -97,7 +97,19 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             "...........",
             "..........*",
     };
-    String[][] boards = {defaultBoardOne, defaultBoardTwo, defaultBoardThree};
+        String[] defaultBoardFour = {
+            "oooov*voooo",
+            "rrrr...rrrr",
+            "oooo..ooooo",
+            "ooo..oooooo",
+            "ooo.ooooooo",
+            "rrr.rrrrrrr",
+            "ooo..oooooo",
+            "ooov..ooooo",
+            "oooor.....x",
+    };
+    
+    String[][] boards = {defaultBoardOne, defaultBoardTwo, defaultBoardThree, defaultBoardFour};
 
     //  Current board the player is on.
     int currentBoardIndex;
