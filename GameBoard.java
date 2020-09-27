@@ -284,10 +284,17 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
                 this.tempPlayerPosition.y >= 0 && this.tempPlayerPosition.y <= boardHeight) {
 
             //  Did the player collide with an obstacle?
-            //  - Update position
-            //  - ??Update Health??
-            //  - Teleport the player
+            for( Point point : this.obstaclePositions ) {
+                if (point.equals(this.tempPlayerPosition)){
+                    this.tempPlayerPosition = this.playerPosition;
+                    break;
+                }
+            }
 
+            //  Did the player collide with a Hazard?
+
+            //  Did the player collide with a reset?
+    
             //  Update the player position.
             this.playerPosition = this.tempPlayerPosition;
         }
