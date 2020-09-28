@@ -255,8 +255,8 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     //  Update the size of a cell
     private void updateCellSize() {
         //  Scale the cell dimensions
-        cellHeight = this.getHeight() / (this.boardHeight+1);
-        cellWidth = this.getWidth() / (this.boardWidth+1);
+        cellHeight = this.getHeight() / this.boardHeight;
+        cellWidth = this.getWidth() / this.boardWidth;
     }
 
     //  Move player
@@ -280,8 +280,8 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
     }
     private void checkPlayerCollisions() {
         //  Is the player in board bounds?
-        if (this.tempPlayerPosition.x >= 0 && this.tempPlayerPosition.x <= boardWidth &&
-                this.tempPlayerPosition.y >= 0 && this.tempPlayerPosition.y <= boardHeight) {
+        if (this.tempPlayerPosition.x >= 0 && this.tempPlayerPosition.x < boardWidth &&
+                this.tempPlayerPosition.y >= 0 && this.tempPlayerPosition.y < boardHeight) {
 
             //  Did the player collide with an obstacle?
             for( Point point : this.obstaclePositions ) {
