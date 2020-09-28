@@ -283,20 +283,45 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
         if (this.tempPlayerPosition.x >= 0 && this.tempPlayerPosition.x < boardWidth &&
                 this.tempPlayerPosition.y >= 0 && this.tempPlayerPosition.y < boardHeight) {
 
-            //  Did the player collide with an obstacle?
-            for( Point point : this.obstaclePositions ) {
-                if (point.equals(this.tempPlayerPosition)){
-                    this.tempPlayerPosition = this.playerPosition;
+            //  Collision states
+            boolean isobstacle = false;
+            boolean ishazardPositions = false;
+            boolean isresetPositions = false;
+
+            //  Check for obstacle Tile
+            for (Point point : this.obstaclePositions) {
+                if (point.equals(this.tempPlayerPosition)) {
+                    isobstacle = true;
                     break;
                 }
             }
 
-            //  Did the player collide with a Hazard?
+            //  Check for hazard Tile and reset game back to Level 1
+            for (Point point : this.hazardPositions) {
+                if (point.equals(this.tempPlayerPosition)) {
+                    ishazardPositions = true;
+                    JOptionPane.showMessageDialog(this, "Oops! You hit Hazard, Moving back to Level 1!!");
+                    this.currentBoardIndex = 0;
+                    this.resetGame();
+                    this.loadGameBoard();
+                    this.repaint();
+                    break;
+                }
+            }
 
-            //  Did the player collide with a reset?
-    
-            //  Update the player position.
-            this.playerPosition = this.tempPlayerPosition;
+            //  Check for reset Tile and reset player back to initial position
+            for (Point point : this.resetPositions) {
+                if (point.equals(this.tempPlayerPosition)) {
+                    isresetPositions = true;
+                    this.playerPosition = this.startPosition;
+                    break;
+                }
+            }
+
+            //  If it's not an obstacle/hazard/reset, let player move
+            if (!isobstacle && !ishazardPositions && !isresetPositions) {
+                this.playerPosition = this.tempPlayerPosition;
+            }
         }
     }
 
