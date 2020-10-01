@@ -17,7 +17,7 @@ public class Obstacles extends JFrame {
     public static final int APP_WIDTH = 800, APP_HEIGHT = 800;
 
     //  Game World
-    public GameBoard gameBoard = new GameBoard();
+    public GameBoard gameBoard;
 
     //  Constructor
     public Obstacles () {
