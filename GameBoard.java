@@ -12,6 +12,8 @@ import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Direction the player is moving
@@ -44,15 +46,16 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
 
     //  Player position
     Point playerPosition = new Point();
-    //  Player Sprite
-    //  @@TODO: add player sprite
+
 
     //  Start position
     Point startPosition = new Point();
     //  Goal position
     Point goalPosition = new Point();
-    //  Goal Sprite
-    //  @@TODO: add goal sprite
+    //  Start Time
+    long startTime;
+    //  Are we Performing a run
+    boolean performingRun = false;
 
     //  Locations of hazards
     ArrayList<Point> hazardPositions = new ArrayList<>();
@@ -197,6 +200,12 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             System.out.println("MAP Goal position not found");
         }
         this.goalPosition = scannedGoalPosition;
+
+        if (this.currentBoardIndex == 0 && !this.performingRun) {
+            this.performingRun = true;
+            JOptionPane.showMessageDialog(this,"Start your run!!");
+            this.startTime = Calendar.getInstance().getTimeInMillis();
+        }
     }
 
     //  Draw a tile
@@ -300,7 +309,6 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             for (Point point : this.hazardPositions) {
                 if (point.equals(this.tempPlayerPosition)) {
                     ishazardPositions = true;
-                    JOptionPane.showMessageDialog(this, "Oops! You hit Hazard, Moving back to Level 1!!");
                     this.currentBoardIndex = 0;
                     this.resetGame();
                     this.loadGameBoard();
@@ -376,13 +384,11 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
 
             //  Did they also beat the game?
             if (this.beatGame()) {
+                this.performingRun = false;
+                long runTime = Calendar.getInstance().getTimeInMillis() - this.startTime;
                 //  Yes, tell them they won and set the next board to 0
-                JOptionPane.showMessageDialog(this,"You beat the Game!!\n Restarting at level 1");
+                JOptionPane.showMessageDialog(this,"You beat the Game in " + runTime/1000. + " seconds.");
                 this.resetGame();
-            }
-            else {
-                JOptionPane.showMessageDialog(this,"You beat the board!!");
-                //  No, load the next board.
             }
             this.loadGameBoard();
         }
