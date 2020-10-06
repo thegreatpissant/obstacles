@@ -203,7 +203,7 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
 
         if (this.currentBoardIndex == 0 && !this.performingRun) {
             this.performingRun = true;
-            JOptionPane.showMessageDialog(this,"Start your run!!");
+            JOptionPane.showMessageDialog(this,"Get Ready to start your run!!\n Use arrow keys to move.");
             this.startTime = Calendar.getInstance().getTimeInMillis();
         }
     }
@@ -367,7 +367,7 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             case KeyEvent.VK_Q:
                 System.exit(0);
             default:
-                System.out.println("KeyPress = " + keyEvent.getKeyChar());
+                //System.out.println("KeyPress = " + keyEvent.getKeyChar());
                 break;
         }
 
@@ -387,7 +387,9 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
                 this.performingRun = false;
                 long runTime = Calendar.getInstance().getTimeInMillis() - this.startTime;
                 //  Yes, tell them they won and set the next board to 0
-                JOptionPane.showMessageDialog(this,"You beat the Game in " + runTime/1000. + " seconds.");
+                if(JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(this,"You beat the Game in " + runTime/1000. + " seconds.\n\n\t\t\tPlay Again?\n", "End of Run", JOptionPane.YES_NO_OPTION)) {
+			System.exit(0);
+		}
                 this.resetGame();
             }
             this.loadGameBoard();
