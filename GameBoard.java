@@ -367,8 +367,8 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             case KeyEvent.VK_Q:
                 System.exit(0);
             default:
+                return;
                 //System.out.println("KeyPress = " + keyEvent.getKeyChar());
-                break;
         }
 
         //  Check player collisions
