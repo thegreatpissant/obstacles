@@ -101,16 +101,17 @@ public class GameBoard extends JPanel implements KeyListener, ComponentListener 
             "*........ooo",
     };
     String[] defaultBoardFour = {
-            "oooov*voooo",
-            "rrrr...rrrr",
-            "oooo..ooooo",
-            "ooo..oooooo",
-            "ooo.ooooooo",
-            "rrr.rrrrrrr",
-            "ooo..oooooo",
-            "ooov..ooooo",
-            "oooor.....x",
+            "..v.....v.*",
+            ".vv..v..vv.",
+            "..vv.vv..v.",
+            "...v...v.v.",
+            "....vv.v.v.",
+            "...v...v.v.",
+            "..v..v.v...",
+            "...v..vvvvv",
+            "....v.....x",
     };
+
     
     String[][] boards = {defaultBoardOne, defaultBoardTwo, defaultBoardThree, defaultBoardFour};
 
